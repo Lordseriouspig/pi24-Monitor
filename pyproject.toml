@@ -1,0 +1,19 @@
+[project]
+name = "pi24_monitor_Lordseriouspig"
+version = "1.0.0"
+authors = [
+  { name="Lordseriouspig", email="lordseriouspig@gmail.com" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/lordseriouspig/pi24-monitor"
+Issues = "https://github.com/lordseriouspig/pi24-monitor/issues"
