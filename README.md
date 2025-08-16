@@ -13,4 +13,34 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+# Pi24-Monitor
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+
+## Overview
+
+**Pi24-Monitor** is a simple python module to interface with Pi24 installations.
+
+## Installation
+
+```bash
+pip install pi24-monitor
+```
+
+## Usage
+
+```python
+import pi24_monitor as pi24
+
+info = pi24.get_monitor(HOST,IP,FILTER) # Returns a JSON object of your radar's status
+aircraft = pi24.get_aircraft(HOST,IP) # Returns a JSON object of the planes in your radar's range
+```
+
+## Requirements
+
+- Python 3.7+
+- A device running Pi24 on your network
+
+## License
+
+This project is licensed under the Apache License 2.0. See the [LICENSE](https://www.apache.org/licenses/LICENSE-2.0) file for details.
