@@ -1,6 +1,6 @@
 [project]
-name = "pi24_monitor"
-version = "1.0.0"
+name = "Py24"
+version = "1.0.1"
 authors = [
   { name="Lordseriouspig", email="lordseriouspig@gmail.com" },
 ]

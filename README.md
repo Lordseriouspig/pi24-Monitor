@@ -13,18 +13,18 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-# Pi24-Monitor
+# Py24
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## Overview
 
-**Pi24-Monitor** is a simple python module to interface with Pi24 installations.
+**Py24** is a simple python module to interface with Pi24 installations.
 
 ## Installation
 
 ```bash
-pip install pi24-monitor
+pip install Py24
 ```
 
 ## Usage
