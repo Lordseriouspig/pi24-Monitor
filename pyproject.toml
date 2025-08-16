@@ -1,10 +1,10 @@
 [project]
-name = "pi24_monitor_Lordseriouspig"
+name = "pi24_monitor"
 version = "1.0.0"
 authors = [
   { name="Lordseriouspig", email="lordseriouspig@gmail.com" },
 ]
-description = "A small example package"
+description = "A simple python package to interface with Pi24 installations."
 readme = "README.md"
 requires-python = ">=3.9"
 classifiers = [
