@@ -44,8 +44,8 @@ def exists(ip,port=8754):
         assert "feed_status" in r.json()
         return {"exists": True}
     except requests.RequestException:
-        return {"exists": False, "status": "not reachable"}
+        return {"exists": False, "status": "cannot_connect"}
     except AssertionError:
-        return {"exists": False, "status": "not found"}
+        return {"exists": False, "status": "not_found"}
     except Exception:
         return {"exists": False, "status": "unknown"}
