@@ -21,18 +21,31 @@ def get_monitor(ip,port=8754,filter=None):
         if filter:
             return [item for item in r.json() if filter in item]
         else:
-            return r.json()
+            return {"success": True, "data": r.json()}
     except requests.RequestException as e:
-        return {"error": str(e)}
+        return {"success": False, "error": str(e)}
     except Exception as e:
-        return {"error": str(e)}
+        return {"success": False, "error": str(e)}
 
 def get_flights(ip,port=8754):
     try:
         r = requests.get(f"http://{ip}:{port}/flights.json")
         r.raise_for_status()
-        return r.json()
+        return {"success": True, "data": r.json()}
     except requests.RequestException as e:
-        return {"error": str(e)}
+        return {"success": False, "error": str(e)}
     except Exception as e:
-        return {"error": str(e)}
+        return {"success": False, "error": str(e)}
+
+def exists(ip,port=8754):
+    try:
+        r = requests.get(f"http://{ip}:{port}/monitor.json")
+        r.raise_for_status()
+        assert "feed_status" in r.json()
+        return {"exists": True}
+    except requests.RequestException:
+        return {"exists": False, "status": "not reachable"}
+    except AssertionError:
+        return {"exists": False, "status": "not found"}
+    except Exception:
+        return {"exists": False, "status": "unknown"}
