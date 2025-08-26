@@ -14,6 +14,15 @@
 
 import requests
 
+class Pi24NotFound(Exception):
+    """Pi24 was not found on the host"""
+
+class Pi24ConnectionError(Exception):
+    """Could not connect to the host"""
+
+class Pi24UnknownError(Exception):
+    """An unknown error occurred"""
+
 def get_monitor(ip,port=8754,filter=None):
     try:
         r = requests.get(f"http://{ip}:{port}/monitor.json")
@@ -21,31 +30,31 @@ def get_monitor(ip,port=8754,filter=None):
         if filter:
             return [item for item in r.json() if filter in item]
         else:
-            return {"success": True, "data": r.json()}
+            return r.json()
     except requests.RequestException as e:
-        return {"success": False, "error": str(e)}
+        raise Pi24ConnectionError(f"Could not connect to {ip}:{port} - {str(e)}")
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        raise Pi24UnknownError(f"An unknown error occurred: {str(e)}")
 
 def get_flights(ip,port=8754):
     try:
         r = requests.get(f"http://{ip}:{port}/flights.json")
         r.raise_for_status()
-        return {"success": True, "data": r.json()}
+        return r.json()
     except requests.RequestException as e:
-        return {"success": False, "error": str(e)}
+        raise Pi24ConnectionError(f"Could not connect to {ip}:{port} - {str(e)}")
     except Exception as e:
-        return {"success": False, "error": str(e)}
+        raise Pi24UnknownError(f"An unknown error occurred: {str(e)}")
 
 def exists(ip,port=8754):
     try:
         r = requests.get(f"http://{ip}:{port}/monitor.json")
         r.raise_for_status()
         assert "feed_status" in r.json()
-        return {"exists": True}
-    except requests.RequestException:
-        return {"exists": False, "status": "cannot_connect"}
+        return True
+    except requests.RequestException as e:
+        raise Pi24ConnectionError(f"Could not connect to {ip}:{port} - {str(e)}")
     except AssertionError:
-        return {"exists": False, "status": "not_found"}
-    except Exception:
-        return {"exists": False, "status": "unknown"}
+        raise Pi24NotFound(f"An instance of Pi24 was not found or returned corrupted data on {ip}:{port}")
+    except Exception as e:
+        raise Pi24UnknownError(f"An unknown error occurred: {str(e)}")
